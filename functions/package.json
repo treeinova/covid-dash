@@ -19,6 +19,7 @@
     "firebase-functions": "^3.3.0",
     "moment": "^2.24.0",
     "puppeteer": "^2.1.1",
+    "spreadsheet-to-json": "^2.0.0",
     "tabletojson": "^2.0.4"
   },
   "devDependencies": {

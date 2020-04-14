@@ -2,6 +2,7 @@ import { Tabletojson } from 'tabletojson';
 import axios from 'axios';
 import * as moment from 'moment';
 import * as functions from 'firebase-functions'
+const { extractSheets } = require("spreadsheet-to-json");
 
 
 
@@ -104,5 +105,30 @@ export const getAllBeds = functions.https.onRequest((request, response) => {
         console.log(res);
         response.send(res);
     })
+
+});
+
+export const getAllReport = functions.https.onRequest((request, response) => {
+    const formatCell = (sheetTitle: any, columnTitle: any, value: any) => value.toUpperCase();
+
+    extractSheets(
+        {
+            // your google spreadhsheet key
+            spreadsheetKey: "2PACX-1vTyy-IyLhyVOnu9fM49nh0NKYpWyTg2nO7mYi7aRfxyojtDrLmtGgB12AXE77AVMax8qNWLXKjABxt_",
+            // your google oauth2 credentials or API_KEY
+            // optional: names of the sheets you want to extract
+            sheetsToExtract: ["brazil_covid19"],
+            // optional: custom function to parse the cells
+            formatCell: formatCell
+        },
+        (err: any, data: any) => {
+            console.log("Data: ", data);
+            response.send(data);
+        }
+    );
+    // return listBeds().then(res => {
+    //     console.log(res);
+
+    // })
 
 });

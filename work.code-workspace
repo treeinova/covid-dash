@@ -1,0 +1,14 @@
+{
+  "folders": [
+	{
+		"path": "app\\covid_dash"
+	},
+	{
+		"path": "functions"
+	},
+	{
+		"path": "migrator-data"
+	}
+],
+  "settings": {}
+}
