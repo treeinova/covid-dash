@@ -20,3 +20,4 @@
 ![Visão Geral Estado ](https://github.com/treeinova/covid-dash/blob/master/screens/Vis%C3%A3o%20Geral%20%E2%80%93%20Estado.png?raw=true)
 ![Busca pela cidade ](https://github.com/treeinova/covid-dash/blob/master/screens/Vis%C3%A3o%20Geral%20%E2%80%93%20Estado%20%E2%80%93%20Busca.png?raw=true)
 ![Busca pela cidade ](https://github.com/treeinova/covid-dash/blob/master/screens/Vis%C3%A3o%20Geral%20%E2%80%93%20Cidade.png?raw=true)
+ 
