@@ -63,3 +63,4 @@ node_modules/
 
 # dotenv environment variables file
 .env
+app/app_covid_dash/android/app/key-covid-dash.jks
