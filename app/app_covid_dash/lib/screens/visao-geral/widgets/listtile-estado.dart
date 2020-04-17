@@ -44,7 +44,7 @@ class ListTileEstado extends StatelessWidget {
               radius: 30,
               backgroundColor: Theme.of(context).primaryColor,
               child: Text(
-                ranking.toString(),
+                "${ranking.toString()}º",
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 23,

@@ -9,8 +9,8 @@ class ReportCovidRepository {
 
   ReportCovidRepository() {
     BaseOptions options = new BaseOptions(
-        // connectTimeout: 5000,
-        );
+      connectTimeout: 60000,
+    );
 
     _dio = new Dio(options);
   }

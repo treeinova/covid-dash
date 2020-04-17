@@ -95,7 +95,8 @@ class AppBarHead extends SliverPersistentHeaderDelegate {
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     final double visibleMainHeight = max(maxExtent - shrinkOffset, minExtent);
-    // final double animationVal = scrollAnimationValue(shrinkOffset);
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Container(
         height: visibleMainHeight,
@@ -152,17 +153,22 @@ class AppBarHead extends SliverPersistentHeaderDelegate {
                 ),
                 Center(
                     child: Container(
-                        height: MediaQuery.of(context).size.height / 5,
-                        width: MediaQuery.of(context).size.width,
+                        height: height / 5,
+                        width: width,
                         child: BlocBuilder<CovidBloc, CovidState>(
                           builder: (context, state) {
                             return BezierChart(
                               bezierChartScale: BezierChartScale.WEEKLY,
                               fromDate: DateTime(2020, 1, 1),
-                              toDate:
-                                  DateTime.now().subtract(Duration(days: 1)),
-                              selectedDate:
-                                  DateTime.now().subtract(Duration(days: 1)),
+                              toDate: DateTime.now(),
+                              selectedDate: state.dateSelected,
+                              onDateTimeSelected: (date) {
+                                BlocProvider.of<CovidBloc>(context)
+                                    .add(SetDateCovidAccumulated(date));
+                              },
+                              onValueSelected: (d) {
+                                print(d);
+                              },
                               //this is optional
                               footerDateTimeBuilder:
                                   (DateTime value, BezierChartScale scaleType) {
@@ -209,9 +215,11 @@ class AppBarHead extends SliverPersistentHeaderDelegate {
                                     ),
                               ],
                               config: BezierChartConfig(
-                                verticalIndicatorStrokeWidth: 2.0,
-                                verticalIndicatorColor: Colors.black12,
+                                verticalIndicatorStrokeWidth: 3.0,
+                                verticalIndicatorColor: Colors.black26,
                                 showVerticalIndicator: true,
+                                verticalIndicatorFixedPosition: false,
+                                showDataPoints: true,
                                 contentWidth:
                                     MediaQuery.of(context).size.width * 2,
                               ),

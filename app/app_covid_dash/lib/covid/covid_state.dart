@@ -4,10 +4,14 @@ import 'package:app_covid_dash/core/models/overview_model.dart';
 import 'package:app_covid_dash/core/models/state_model.dart';
 import 'package:app_covid_dash/core/repositories/report-covid_repository.dart';
 
-abstract class CovidState {}
+abstract class CovidState {
+  final DateTime dateSelected;
+
+  CovidState({this.dateSelected});
+}
 
 class DataCovidLoading extends CovidState {
-  DataCovidLoading();
+  DataCovidLoading() : super(dateSelected: DateTime.now());
 
   @override
   String toString() => 'InitialState';
@@ -19,7 +23,20 @@ class DataCovidLoaded extends CovidState {
   final List<CountryAccumulatdModel> covidAccumulated;
   final OverviewModel countryModel;
 
-  DataCovidLoaded({this.states, this.covidAccumulated, this.countryModel});
+  DataCovidLoaded(
+      {this.states,
+      this.covidAccumulated,
+      this.countryModel,
+      DateTime dateSelected})
+      : super(dateSelected: dateSelected ?? DateTime.now());
+
+  DataCovidLoaded copyWith({DateTime dateSelected}) {
+    return DataCovidLoaded(
+        states: this.states,
+        covidAccumulated: this.covidAccumulated,
+        countryModel: this.countryModel,
+        dateSelected: dateSelected ?? DateTime.now());
+  }
 
   @override
   String toString() =>

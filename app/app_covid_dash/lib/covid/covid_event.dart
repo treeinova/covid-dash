@@ -35,13 +35,37 @@ class LoadDataCovid extends CovidEvent {
           await this._covidRepository.getReportCovidBrazilAccumulated();
       var reportCovidState =
           await this._covidRepository.getReportCovidBrazilMap();
+
       yield DataCovidLoaded(
           states: reportCovidState..sort((a, b) => a.compareTo(b)),
           countryModel: reportCovidBrazil,
-          covidAccumulated: reportCovidBrazilAccumulated);
+          covidAccumulated: reportCovidBrazilAccumulated,
+          dateSelected: currentState.dateSelected);
     } catch (_, stackTrace) {
       developer.log('$_',
           name: 'LoadCovidEvent', error: _, stackTrace: stackTrace);
+      yield ErrorCovidState(_?.toString());
+    }
+  }
+}
+
+class SetDateCovidAccumulated extends CovidEvent {
+  final DateTime dateSelected;
+
+  SetDateCovidAccumulated(this.dateSelected);
+  @override
+  String toString() => 'SetDateCovidAccumulated';
+
+  @override
+  Stream<CovidState> applyAsync(
+      {CovidState currentState, CovidBloc bloc}) async* {
+    try {
+      var state = currentState as DataCovidLoaded;
+
+      yield state.copyWith(dateSelected: dateSelected);
+    } catch (_, stackTrace) {
+      developer.log('$_',
+          name: 'SetDateCovidAccumulated', error: _, stackTrace: stackTrace);
       yield ErrorCovidState(_?.toString());
     }
   }
